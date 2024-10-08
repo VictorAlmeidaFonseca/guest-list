@@ -1,0 +1,124 @@
+.page {
+    padding: 20px;
+    text-align: center; /* Centraliza o conteúdo da página */
+  }
+  
+  .title {
+    font-family: 'Georgia', serif;
+    font-size: 2.5em;
+    color: #6b4f4f; /* Cor mais elegante para o título */
+    margin-bottom: 30px; /* Aumenta o espaço abaixo do título */
+  }
+
+  .subTitle {
+    font-family: 'Georgia', serif;
+    font-size: 1.5em;
+    color: #6b4f4f; /* Cor mais elegante para o título */
+    margin-bottom: 15px; /* Aumenta o espaço abaixo do título */
+  }
+
+  
+  .table {
+    margin: 0 auto; /* Centraliza a tabela */
+    width: 80%; /* Define uma largura de 80% para não ocupar a tela inteira */
+    border-collapse: collapse;
+    background-color: #f9f9f9; /* Cor de fundo suave */
+    border: 2px solid #e5e5e5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra à tabela */
+  }
+  
+  .tableHeader, .tableCell {
+    padding: 15px;
+    border: 1px solid #ddd; /* Cor das bordas das células */
+    text-align: center; /* Centraliza o conteúdo das células */
+  }
+  
+  .tableHeader {
+    background-color: #6b4f4f; /* Cor do cabeçalho */
+    color: white; /* Cor do texto no cabeçalho */
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  
+  .tableCell {
+    background-color: #fff;
+  }
+  
+  .inputText, .inputNumber {
+    padding: 10px;
+    margin-right: 10px;
+    width: 150px;
+    border: 1px solid #ccc; /* Borda leve nos inputs */
+    border-radius: 4px; /* Bordas arredondadas nos inputs */
+  }
+  
+  .addButton, .inviteButton {
+    padding: 10px 15px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .addButton {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+  }
+  
+  .inviteButton {
+    background-color: #008CBA; /* Azul */
+    color: white;
+    transition: background-color 0.3s ease; /* Animação suave ao passar o mouse */
+  }
+  
+  .inviteButton:hover {
+    background-color: #005f7f; /* Azul mais escuro ao passar o mouse */
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .table {
+      width: 100%; /* Ocupa toda a largura disponível em telas menores */
+    }
+  
+    .inputText, .inputNumber {
+      width: 100px; /* Reduz o tamanho dos inputs para caber melhor na tela */
+    }
+  
+    .tableHeader, .tableCell {
+      font-size: 0.9em; /* Diminui o tamanho da fonte nas células */
+      padding: 10px;
+    }
+  
+    .addButton, .inviteButton {
+      padding: 8px 10px; /* Ajusta o tamanho dos botões em telas menores */
+      font-size: 0.9em;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .tableHeader, .tableCell {
+      display: block; /* Exibe os elementos da tabela em bloco, um por linha */
+      width: 100%; /* Cada célula ocupará toda a largura disponível */
+    }
+  
+    .table {
+      border: none; /* Remove as bordas da tabela para mobile */
+    }
+  
+    .tableRow {
+      margin-bottom: 10px; /* Espaço entre as linhas */
+    }
+  
+    .inputText, .inputNumber {
+      width: 100%; /* Inputs ocupam toda a largura no mobile */
+      margin-bottom: 10px;
+    }
+  
+    .addButton, .inviteButton {
+      width: 100%; /* Botões ocupam toda a largura no mobile */
+      margin-bottom: 10px;
+    }
+  }
+  

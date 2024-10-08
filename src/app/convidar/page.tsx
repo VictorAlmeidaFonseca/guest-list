@@ -2,29 +2,28 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "./page.module.css"; // Importando CSS Modules
+import styles from "./page.module.css";
+import { FaEdit, FaShareAlt } from "react-icons/fa"; 
+import { BiLike , BiDislike } from "react-icons/bi";
+// Importando o ícone de edição
 
 interface Guest {
+  id: string;
   prefix: string;
   convidado: string;
   quantidade: number;
-  confirmado?: boolean;
-  quantidadeConfirmada?: number;
+  confirmado: boolean;
+  quantidadeConfirmada: number;
 }
 
 export default function GuestList() {
   const [guests, setGuests] = useState<Guest[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [newGuest, setNewGuest] = useState<Guest>({
-    prefix: "",
-    convidado: "",
-    quantidade: 0,
-    confirmado: false,
-    quantidadeConfirmada: 0,
-  });
+  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [editedName, setEditedName] = useState<string>("");
+  const [editedPrefix, setEditedPrefix] = useState<string>("");
 
-  // Função para buscar os dados da API
   const fetchGuests = async () => {
     try {
       const response = await axios.get(
@@ -36,20 +35,16 @@ export default function GuestList() {
         }
       );
 
-      console.log(response.data); // Adiciona um log dos dados no console
-
       setGuests(
         response.data.map((guest: Guest) => ({
           ...guest,
           prefix: guest.prefix || "",
-          aceito: guest.confirmado || false, // Inicializa com false se não houver valor
-          quantidadeAceita: guest.quantidadeConfirmada || 0, // Inicializa com 0 se não houver valor
+          confirmado: guest.confirmado || false,
+          quantidadeConfirmada: guest.quantidadeConfirmada || 0,
         }))
       );
       setLoading(false);
     } catch (err) {
-      console.error(err); // Adiciona um log do erro no console
-
       if (axios.isAxiosError(err)) {
         setError(err.message);
       } else {
@@ -63,29 +58,35 @@ export default function GuestList() {
     fetchGuests();
   }, []);
 
-  // Função para lidar com a alteração no nome ou quantidade
-  const handleChange = (
-    index: number,
-    field: "convidado" | "quantidade" | "prefix" | "quantidadeConfirmada" | "confirmado",
-    value: string | number | boolean
-  ) => {
-    const newGuests = [...guests];
-    (newGuests[index][field] as typeof value) = value;
-    setGuests(newGuests);
+  const handleEditClick = (index: number, prefix: string, name: string) => {
+    setEditIndex(index);
+    setEditedPrefix(prefix);
+    setEditedName(name);
   };
 
-  // Função para adicionar um novo convidado inline
-  const addGuest = () => {
-    setGuests([...guests, newGuest]);
-    setNewGuest({ prefix: "", convidado: "", quantidade: 0, confirmado: false, quantidadeConfirmada: 0 });
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditedName(e.target.value);
   };
 
-  // Função para gerar o link de convite
+  const handlePrefixChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditedPrefix(e.target.value);
+  };
+
+  const handleSaveClick = (index: number) => {
+    const updatedGuests = guests.map((guest, i) =>
+      i === index
+        ? { ...guest, convidado: editedName, prefix: editedPrefix }
+        : guest
+    );
+    setGuests(updatedGuests);
+    setEditIndex(null);
+  };
+
   const generateInviteLink = (guest: Guest) => {
     const name = encodeURIComponent(guest.convidado);
     const quantity = guest.quantidade;
-    const prefix = guest.prefix || "Sr."; // Você pode personalizar isso
-    return `http://localhost:3000/?name=${name}&prefix=${prefix}&quantity=${quantity}`;
+    const prefix = guest.prefix || "Sr.";
+    return `https://nicole-e-victor.netlify.app/?name=${name}&prefix=${prefix}&quantity=${quantity}`;
   };
 
   if (loading) {
@@ -98,159 +99,89 @@ export default function GuestList() {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>Lista de Convidados</h1>      
-      <h3 className={styles.subTitle}>total: {guests.reduce(((acc, curr) => curr.quantidade + acc), 0) }</h3>
-      <h3 className={styles.subTitle}>confirmados: {guests.filter(g => g.confirmado).reduce(((acc, curr) => (curr.quantidadeConfirmada ?? 0) + acc), 0) }</h3>
-      {/* Tabela de convidados */}
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th className={styles.tableHeader}>Tratamento</th>
-            <th className={styles.tableHeader}>Convidado</th>
-            <th className={styles.tableHeader}>Quantidade</th>
-            <th className={styles.tableHeader}>Aceito</th>
-            <th className={styles.tableHeader}>Quantidade Aceita</th>
-            <th className={styles.tableHeader}>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* Linha para adicionar novo convidado inline */}
-          <tr className={styles.tableRow}>
-            <td className={styles.tableCell}>
-              <input
-                className={styles.inputText}
-                type="text"
-                placeholder="Tratamento"
-                value={newGuest.prefix}
-                onChange={(e) =>
-                  setNewGuest({ ...newGuest, prefix: e.target.value })
-                }
-              />
-            </td>
-            <td className={styles.tableCell}>
-              <input
-                className={styles.inputText}
-                type="text"
-                placeholder="Nome do Convidado"
-                value={newGuest.convidado}
-                onChange={(e) =>
-                  setNewGuest({ ...newGuest, convidado: e.target.value })
-                }
-              />
-            </td>
-            <td className={styles.tableCell}>
-              <input
-                className={styles.inputNumber}
-                type="number"
-                placeholder="Quantidade"
-                value={newGuest.quantidade}
-                onChange={(e) =>
-                  setNewGuest({
-                    ...newGuest,
-                    quantidade: Number(e.target.value),
-                  })
-                }
-              />
-            </td>
-            <td className={styles.tableCell}>
-              <input
-                className={styles.inputNumber}
-                type="checkbox"
-                checked={newGuest.confirmado}
-                onChange={(e) =>
-                  setNewGuest({
-                    ...newGuest,
-                    confirmado: e.target.checked,
-                  })
-                }
-              />
-            </td>
-            <td className={styles.tableCell}>
-              <input
-                className={styles.inputNumber}
-                type="number"
-                placeholder="Qtd Aceita"
-                value={newGuest.quantidadeConfirmada}
-                onChange={(e) =>
-                  setNewGuest({
-                    ...newGuest,
-                    quantidadeConfirmada: Number(e.target.value),
-                  })
-                }
-              />
-            </td>
-            <td className={styles.tableCell}>
-              <button className={styles.addButton} onClick={addGuest}>
-                Adicionar
-              </button>
-            </td>
-          </tr>
+      <h1 className={styles.title}>Lista de Convidados</h1>
+      <h3>
+        convidados: {guests.reduce((acc, curr) => curr.quantidade + acc, 0)}
+      </h3>
+      <h3>já responderam: {guests.filter((q) => q.confirmado).length}</h3>
+      <h3 className={styles.subtitle}>
+        confirmados:{" "}
+        {guests
+          .filter((g) => g.confirmado)
+          .reduce((acc, curr) => curr.quantidadeConfirmada + acc, 0)}
+      </h3>
 
-          {/* Exibição dos convidados */}
-          {guests.map((guest, index) => (
-            <tr key={index} className={styles.tableRow}>
-              <td className={styles.tableCell}>
-                <input
-                  className={styles.inputText}
-                  type="text"
-                  value={guest.prefix || ""}
-                  onChange={(e) =>
-                    handleChange(index, "prefix", e.target.value)
-                  }
-                />
-              </td>
-              <td className={styles.tableCell}>
-                <input
-                  className={styles.inputText}
-                  type="text"
-                  value={guest.convidado}
-                  onChange={(e) =>
-                    handleChange(index, "convidado", e.target.value)
-                  }
-                />
-              </td>
-              <td className={styles.tableCell}>
-                <input
-                  className={styles.inputNumber}
-                  type="number"
-                  value={guest.quantidade}
-                  onChange={(e) =>
-                    handleChange(index, "quantidade", Number(e.target.value))
-                  }
-                />
-              </td>
-              <td className={styles.tableCell}>
-                <input
-                  className={styles.inputNumber}
-                  type="checkbox"
-                  checked={guest.confirmado || false}
-                  onChange={(e) =>
-                    handleChange(index, "confirmado", e.target.checked)
-                  }
-                />
-              </td>
-              <td className={styles.tableCell}>
-                <input
-                  className={styles.inputNumber}
-                  type="number"
-                  value={guest.quantidadeConfirmada || 0}
-                  onChange={(e) =>
-                    handleChange(index, "quantidadeConfirmada", Number(e.target.value))
-                  }
-                />
-              </td>
-              <td className={styles.tableCell}>
-                <button
-                  className={styles.inviteButton}
-                  onClick={() => window.open(generateInviteLink(guest), "_blank")}
-                >
-                  Convidar
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {guests.map((guest, index) => (
+        <div
+          key={index}
+          className={
+            guest.confirmado && guest.quantidadeConfirmada === 0
+              ? styles.card_disabled
+              : styles.card
+          }
+        >
+          <div className={styles["card-content"]}>
+            <div className={styles["card-header"]}>
+              {editIndex === index ? (
+                <>
+                  <input
+                    type="text"
+                    value={editedPrefix}
+                    onChange={handlePrefixChange}
+                    className={styles["edit-input"]}
+                    placeholder="Prefixo"
+                  />
+                  <input
+                    type="text"
+                    value={editedName}
+                    onChange={handleNameChange}
+                    className={styles["edit-input"]}
+                    placeholder="Nome"
+                  />
+                </>
+              ) : (
+                <>
+                  {guest.prefix} {guest.convidado}
+                  <FaEdit
+                    className={styles["edit-icon"]}
+                    onClick={() =>
+                      handleEditClick(index, guest.prefix, guest.convidado)
+                    }
+                  />
+                </>
+              )}
+            </div>
+            <div className={styles["card-info"]}>
+              <span>Quantidade: {guest.quantidade}</span>
+              <span className={styles.amount}>
+                confirmados: {guest.quantidadeConfirmada}
+              </span>
+              <span>
+                {guest.confirmado ? (
+                  <span className={`${styles.badge} ${styles.confirmed}`}>
+                    Confirmado
+                  </span>
+                ) : (
+                  <span className={`${styles.badge} ${styles.unconfirmed}`}>
+                    Não confirmado
+                  </span>
+                )}
+              </span>
+            </div>
+          </div>
+          <FaShareAlt
+            onClick={() => window.open(generateInviteLink(guest), "_blank")}
+          ></FaShareAlt>
+          {editIndex === index && (
+            <button
+              className={styles["save-button"]}
+              onClick={() => handleSaveClick(index)}
+            >
+              Salvar
+            </button>
+          )}
+        </div>
+      ))}
     </div>
   );
 }

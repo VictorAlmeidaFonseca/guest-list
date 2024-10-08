@@ -1,77 +1,70 @@
-/* Estilização da página */
+/* Estilos gerais da página */
 .page {
   background-color: #fefaf2;
   color: #8D6E46;
   font-family: 'Playfair Display', serif;
   text-align: center;
-  padding: 40px;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
 }
 
-/* Cabeçalho elegante */
+/* Ajuste da fonte do cabeçalho */
 .header {
   font-family: 'Geist', sans-serif;
   margin-bottom: 30px;
 }
 
 .title {
-  font-size: 3rem;
+  font-size: 2.5rem; /* Ajuste para responsividade */
   font-weight: bold;
   color: #B9995A;
 }
 
 .date {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-style: italic;
-  font-family: 'Playfair Display Italic', serif;
   color: #8D6E46;
 }
 
-/* Conteúdo principal */
+/* Estilos para o conteúdo principal */
 .main {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 20px;
 }
 
 .invitationTitle {
-  font-family: 'Geist', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.4rem; /* Ajuste responsivo */
   margin-bottom: 10px;
   font-weight: bold;
 }
 
 .invitationSubTitle {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  margin-bottom: 20px; /* Adicionando mais espaço abaixo do subtítulo */
+  font-size: 1.1rem;
+  margin-bottom: 15px; /* Menor espaçamento para mobile */
   font-style: italic;
 }
 
-/* Estilização dos selects e labels */
+/* Ajustes para selects e labels */
 .selectWrapper {
-  margin-bottom: 20px; /* Aumentando o espaço entre os selects */
-  text-align: center; /* Centralizando as labels */
+  margin-bottom: 15px; /* Menos espaço entre selects para mobile */
+  text-align: center;
   width: 100%;
   max-width: 350px;
 }
 
-/* Estilizando as labels */
 .selectWrapper label {
   display: block;
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-  font-family: 'Playfair Display', serif;
+  margin-bottom: 8px;
+  font-size: 1rem;
 }
 
-/* Estilização do select */
 .customSelect {
   width: 100%;
   padding: 12px;
@@ -86,7 +79,6 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo hover e foco no select */
 .customSelect:hover {
   border-color: #B9995A;
 }
@@ -96,7 +88,7 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Botão enviar */
+/* Estilos do botão enviar */
 .sendButton {
   margin-top: 20px;
 }
@@ -106,7 +98,7 @@
   color: #fff;
   border: none;
   padding: 12px 24px;
-  font-size: 1.1rem;
+  font-size: 1rem; /* Menor em dispositivos móveis */
   font-family: 'Playfair Display', serif;
   border-radius: 8px;
   cursor: pointer;
@@ -117,32 +109,64 @@
   background-color: #8D6E46;
 }
 
-/* Estilização do rodapé */
+/* Estilos do rodapé */
 .footer {
-  font-size: 1.1rem;
+  font-size: 1rem; /* Tamanho ajustado para dispositivos menores */
   color: #8D6E46;
-  font-style: italic;
   font-family: 'Playfair Display Italic', serif;
-  margin-top: 20px;
+  margin-top: 30px;
+  padding: 20px 0;
 }
+
+/* Ajustes de links para mapas */
 .mapLinks {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px; /* Menor espaçamento entre ícones para mobile */
+  margin-top: 10px;
 }
 
 .mapLinks a {
-  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.mapLinks a:hover {
+  transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
 }
 
 .icon {
-  width: 40px;
-  height: 40px;
-  transition: transform 0.3s ease;
-  filter: brightness(0) sepia(1) saturate(1000%) hue-rotate(30deg) brightness(1.5);
+  width: 45px; /* Ícones menores para telas pequenas */
+  height: 45px;
+  transition: filter 0.3s;
 }
 
 .icon:hover {
-  transform: scale(1.1);
+  filter: brightness(1.2);
 }
 
+/* Media query para dispositivos móveis */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem; /* Ajuste do tamanho do título */
+  }
+
+  .invitationTitle {
+    font-size: 1.2rem; /* Menor título em dispositivos móveis */
+  }
+
+  .invitationSubTitle {
+    padding-bottom: 1.2rem;
+    font-size: 1rem; /* Menor subtítulo em dispositivos móveis */
+  }
+
+  .sendButton button {
+    padding: 10px 20px; /* Menor padding no botão em telas pequenas */
+    font-size: 0.9rem;
+  }
+
+  .icon {
+    width: 40px; /* Ícones menores para dispositivos móveis */
+    height: 40px;
+  }
+}

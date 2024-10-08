@@ -10,7 +10,7 @@ export default function Home() {
   const [name, setName] = useState<string | null>(""); // Nome da pessoa
   const [prefix, setPrefix] = useState<string | null>(""); // Prefixo (Sr./Sra./etc.)
   const [going, setGoing] = useState<boolean | null>(null); // Se a pessoa vai comparecer ou não
-  const [selectedQuantity, setSelectedQuantity] = useState<number>(1); // Quantidade de pessoas selecionadas
+  const [selectedQuantity, setSelectedQuantity] = useState<number>(0); // Quantidade de pessoas selecionadas
   const router = useRouter(); // Inicializa o router para redirecionamento
 
   const searchParams = useSearchParams();
@@ -41,7 +41,7 @@ export default function Home() {
 
   // Função para envio do formulário
   const handleSubmit = async () => {
-    if (going) {
+  
       const body = {
         convidado: name,
         quantidade: quantity,
@@ -72,14 +72,12 @@ export default function Home() {
       } catch (error) {
         console.error("Erro de requisição:", error);
       }
-    } else {
-      console.log("Infelizmente, não poderá comparecer.");
-    }
+  
   };
 
   // Links para Google Maps e Waze com suas coordenadas personalizadas
-  // const googleMapsLink = `https://www.google.com/maps/dir/?api=1&destination=-23.525884144098423,-47.58460169398168`;
-  // const wazeLink = `https://waze.com/ul?ll=-23.525884144098423,-47.58460169398168&navigate=yes`;
+  const googleMapsLink = `https://www.google.com/maps/dir/?api=1&destination=-23.525884144098423,-47.58460169398168`;
+  const wazeLink = `https://waze.com/ul?ll=-23.525884144098423,-47.58460169398168&navigate=yes`;
 
   return (
     <div className={styles.page}>
@@ -129,16 +127,25 @@ export default function Home() {
         </div>
       </main>
       <footer className={styles.footer}>
-        {/* <h3>Como chegar:</h3>
-        <div className={styles.mapLinks}>
-          <a href={googleMapsLink} target="_blank" rel="noopener noreferrer">
-            <img src="/icons8-google-maps.svg" alt="Google Maps" className={styles.icon} />
-          </a>
-          <a href={wazeLink} target="_blank" rel="noopener noreferrer">
-            <img src="/icons8-waze.svg" alt="Waze" className={styles.icon} />
-          </a>
-        </div> */}
-      </footer>
+  <div className={styles.footerInfo}>
+    <div><strong>Horário:</strong> 17h</div>
+    <div><strong>Endereço:</strong> Estr. Dr. Celso Charuri, 97</div>
+    <div>Res. Aquarius, Araçoiaba da Serra - SP</div>
+    <div>18190-000</div>
+  </div>
+
+  <h3 className={styles.mapTitle}>Como chegar:</h3>
+  
+  <div className={styles.mapLinks}>
+    <a href={googleMapsLink} target="_blank" rel="noopener noreferrer">
+      <img src="/icons8-google-maps.svg" alt="Google Maps" className={styles.icon} />
+    </a>
+    <a href={wazeLink} target="_blank" rel="noopener noreferrer">
+      <img src="/icons8-waze.svg" alt="Waze" className={styles.icon} />
+    </a>
+  </div>
+</footer>
+
     </div>
   );
 }

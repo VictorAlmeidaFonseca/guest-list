@@ -1,124 +1,148 @@
 .page {
-    padding: 20px;
-    text-align: center; /* Centraliza o conteúdo da página */
-  }
-  
-  .title {
-    font-family: 'Georgia', serif;
-    font-size: 2.5em;
-    color: #6b4f4f; /* Cor mais elegante para o título */
-    margin-bottom: 30px; /* Aumenta o espaço abaixo do título */
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f5f5f5;
+}
+
+.title {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+}
+
+.subtitle {
+  margin-bottom: 30px;
+}
+
+.card {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card_disabled {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0.5; /* Reduz a opacidade para dar o efeito de desabilitado */
+  pointer-events: none; /* Remove a interação, como cliques */
+  cursor: not-allowed; 
+}
+
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.card-info {
+  display: flex;
+  gap: 10px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.card-info span {
+  display: flex;
+  align-items: center;
+}
+
+.badge {
+  font-size: 0.75em;
+  padding: 5px 10px;
+  border-radius: 12px;
+  margin-left: 5px;
+}
+
+.badge.confirmed {
+  background-color: #4caf50;
+  color: white;
+}
+
+.badge.unconfirmed {
+  background-color: #c94d44;
+  color: white;
+}
+
+.badge.pending {
+  background-color: #ffeb3b;
+  color: black;
+}
+
+.invite-button {
+  background-color: #008cba;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.invite-button:hover {
+  background-color: #005f7f;
+}
+
+.amount {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .subTitle {
-    font-family: 'Georgia', serif;
-    font-size: 1.5em;
-    color: #6b4f4f; /* Cor mais elegante para o título */
-    margin-bottom: 15px; /* Aumenta o espaço abaixo do título */
+  .card_disabled {
+    flex-direction: column;
+    align-items: flex-start;
   }
+  
 
-  
-  .table {
-    margin: 0 auto; /* Centraliza a tabela */
-    width: 80%; /* Define uma largura de 80% para não ocupar a tela inteira */
-    border-collapse: collapse;
-    background-color: #f9f9f9; /* Cor de fundo suave */
-    border: 2px solid #e5e5e5;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra à tabela */
+  .invite-button {
+    width: 100%;
+    margin-top: 10px;
   }
-  
-  .tableHeader, .tableCell {
-    padding: 15px;
-    border: 1px solid #ddd; /* Cor das bordas das células */
-    text-align: center; /* Centraliza o conteúdo das células */
-  }
-  
-  .tableHeader {
-    background-color: #6b4f4f; /* Cor do cabeçalho */
-    color: white; /* Cor do texto no cabeçalho */
-    font-weight: bold;
-    font-size: 1.2em;
-  }
-  
-  .tableCell {
-    background-color: #fff;
-  }
-  
-  .inputText, .inputNumber {
-    padding: 10px;
-    margin-right: 10px;
-    width: 150px;
-    border: 1px solid #ccc; /* Borda leve nos inputs */
-    border-radius: 4px; /* Bordas arredondadas nos inputs */
-  }
-  
-  .addButton, .inviteButton {
-    padding: 10px 15px;
-    margin-right: 5px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-  
-  .addButton {
-    background-color: #4CAF50; /* Verde */
-    color: white;
-  }
-  
-  .inviteButton {
-    background-color: #008CBA; /* Azul */
-    color: white;
-    transition: background-color 0.3s ease; /* Animação suave ao passar o mouse */
-  }
-  
-  .inviteButton:hover {
-    background-color: #005f7f; /* Azul mais escuro ao passar o mouse */
-  }
-  
-  /* Responsividade */
-  @media (max-width: 768px) {
-    .table {
-      width: 100%; /* Ocupa toda a largura disponível em telas menores */
-    }
-  
-    .inputText, .inputNumber {
-      width: 100px; /* Reduz o tamanho dos inputs para caber melhor na tela */
-    }
-  
-    .tableHeader, .tableCell {
-      font-size: 0.9em; /* Diminui o tamanho da fonte nas células */
-      padding: 10px;
-    }
-  
-    .addButton, .inviteButton {
-      padding: 8px 10px; /* Ajusta o tamanho dos botões em telas menores */
-      font-size: 0.9em;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .tableHeader, .tableCell {
-      display: block; /* Exibe os elementos da tabela em bloco, um por linha */
-      width: 100%; /* Cada célula ocupará toda a largura disponível */
-    }
-  
-    .table {
-      border: none; /* Remove as bordas da tabela para mobile */
-    }
-  
-    .tableRow {
-      margin-bottom: 10px; /* Espaço entre as linhas */
-    }
-  
-    .inputText, .inputNumber {
-      width: 100%; /* Inputs ocupam toda a largura no mobile */
-      margin-bottom: 10px;
-    }
-  
-    .addButton, .inviteButton {
-      width: 100%; /* Botões ocupam toda a largura no mobile */
-      margin-bottom: 10px;
-    }
-  }
-  
+}
+
+.edit-input {
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.edit-icon {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.save-button {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.save-button:hover {
+  background-color: #218838;
+}

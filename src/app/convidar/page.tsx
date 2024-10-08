@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./page.module.css";
 import { FaEdit, FaShareAlt } from "react-icons/fa"; 
-import { BiLike , BiDislike } from "react-icons/bi";
 // Importando o ícone de edição
 
 interface Guest {

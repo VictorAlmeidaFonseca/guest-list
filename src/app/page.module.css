@@ -65,20 +65,36 @@
   font-size: 1rem;
 }
 
+/* Alinhamento lado a lado dos botões de decisão */
+.selectWrapperDecision {
+  display: flex;
+  justify-content: center; /* Centraliza os botões */
+  gap: 20px; /* Espaçamento entre os botões */
+  margin-bottom: 20px; /* Espaçamento inferior */
+}
+
+/* Pergunta de confirmação com tamanho reduzido */
+.confirmationQuestion {
+  font-size: 1rem; /* Reduzindo o tamanho da pergunta */
+  margin-bottom: 10px; /* Menor espaçamento inferior */
+}
+
+/* Estilização do select ajustado */
 .customSelect {
-  width: 100%;
-  padding: 12px;
-  font-size: 1.1rem;
+  width: 80%; /* Reduzindo a largura */
+  padding: 8px; /* Menor padding no campo */
+  font-size: 1rem; /* Fonte menor */
   font-family: 'Playfair Display', serif;
   color: #8D6E46;
   background-color: #fcf7f1;
   border: 2px solid #C0A77D;
-  border-radius: 10px;
+  border-radius: 8px; /* Borda mais suave */
   appearance: none;
   transition: border-color 0.3s, box-shadow 0.3s;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Hover e foco ajustados */
 .customSelect:hover {
   border-color: #B9995A;
 }
@@ -88,11 +104,7 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos do botão enviar */
-.sendButton {
-  margin-top: 20px;
-}
-
+/* Estilização do botão enviar */
 .sendButton button {
   background-color: #B9995A;
   color: #fff;
@@ -103,10 +115,29 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
+  min-width: 100px; /* Largura mínima para consistência */
 }
 
 .sendButton button:hover {
   background-color: #8D6E46;
+}
+
+/* Botão "Não" com cor negativa */
+.sendButtonNegative button {
+  background-color: #E57373; /* Cor negativa para o botão "Não" */
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-family: 'Playfair Display', serif;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  min-width: 100px; /* Largura mínima para consistência */
+}
+
+.sendButtonNegative button:hover {
+  background-color: #D32F2F; /* Cor de hover para o botão "Não" */
 }
 
 /* Estilos do rodapé */
@@ -145,6 +176,36 @@
   filter: brightness(1.2);
 }
 
+/* Adicionando uma transição suave para troca de conteúdo */
+.fade-enter,
+.fade-exit {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-enter-active {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+}
+
+/* Outros estilos permanecem iguais */
+.spinnerWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo semitransparente */
+  z-index: 9999; /* Coloca o spinner acima de todos os elementos */
+}
+
+
 /* Media query para dispositivos móveis */
 @media (max-width: 768px) {
   .title {
@@ -160,7 +221,7 @@
     font-size: 1rem; /* Menor subtítulo em dispositivos móveis */
   }
 
-  .sendButton button {
+  .sendButton button, .sendButtonNegative button {
     padding: 10px 20px; /* Menor padding no botão em telas pequenas */
     font-size: 0.9rem;
   }
@@ -169,4 +230,16 @@
     width: 40px; /* Ícones menores para dispositivos móveis */
     height: 40px;
   }
+
+  .confirmationQuestion {
+    font-size: 0.9rem; /* Diminuindo ainda mais a pergunta para mobile */
+  }
+
+  .customSelect {
+    width: 90%; /* Aumentando a responsividade no mobile */
+    padding: 6px; /* Reduzindo o padding no mobile */
+    font-size: 0.9rem; /* Fonte menor no mobile */
+  }
 }
+
+

@@ -83,9 +83,10 @@ export default function GuestList() {
 
   const generateInviteLink = (guest: Guest) => {
     const name = encodeURIComponent(guest.convidado);
+    const id = guest.id;
     const quantity = guest.quantidade;
     const prefix = guest.prefix || "Sr.";
-    return `https://nicole-e-victor.netlify.app/?name=${name}&prefix=${prefix}&quantity=${quantity}`;
+    return `https://nicole-e-victor.netlify.app/?name=${name}&prefix=${prefix}&quantity=${quantity}&id=${id}`;
   };
 
   if (loading) {

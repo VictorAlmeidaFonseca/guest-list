@@ -206,6 +206,11 @@
   z-index: 9999; /* Coloca o spinner acima de todos os elementos */
 }
 
+.footerDescription {
+  font-family: roboto;
+}
+  
+
 
 /* Media query para dispositivos móveis */
 @media (max-width: 768px) {

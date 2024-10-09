@@ -150,6 +150,10 @@
   padding: 20px 0;
 }
 
+.mapTitle {
+  padding-top: 15px
+}
+
 /* Ajustes de links para mapas */
 .mapLinks {
   display: flex;

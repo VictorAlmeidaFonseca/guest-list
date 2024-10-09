@@ -126,6 +126,7 @@ export default function Home() {
   );
 
   return (
+    <>
     <Head>
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,400&display=swap"
@@ -185,5 +186,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
+        </>
   );
 }

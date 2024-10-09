@@ -223,6 +223,10 @@
     font-size: 2rem; /* Ajuste do tamanho do título */
   }
 
+  .footerDescription {
+    font-size: 1.2rem; /* Menor título em dispositivos móveis */
+  }
+
   .invitationTitle {
     font-size: 1.2rem; /* Menor título em dispositivos móveis */
   }

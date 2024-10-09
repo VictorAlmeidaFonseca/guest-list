@@ -2,7 +2,9 @@
 
 import { useSearchParams, useRouter } from "next/navigation"; // Adicionar useRouter
 import { useEffect, useState } from "react";
-import { ClipLoader } from "react-spinners"; // Importa o spinner
+import { ClipLoader } from "react-spinners"; 
+import Head from 'next/head';
+// Importa o spinner
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -124,6 +126,12 @@ export default function Home() {
   );
 
   return (
+    <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,400&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
     <div className={styles.page}>
       <div className={styles.header}>
         <h1 className={styles.title}>N & V</h1>

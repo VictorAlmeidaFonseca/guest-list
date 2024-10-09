@@ -151,14 +151,14 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <div className={styles.footerInfo}>
-          <div>
+          <div className={styles.footerDescription}>
             <strong>Horário:</strong> 17h
           </div>
-          <div>
+          <div className={styles.footerDescription}>
             <strong>Endereço:</strong> Estr. Dr. Celso Charuri, 97
           </div>
-          <div>Res. Aquarius, Araçoiaba da Serra - SP</div>
-          <div>18190-000</div>
+          <div className={styles.footerDescription}>Res. Aquarius, Araçoiaba da Serra - SP</div>
+          <div className={styles.footerDescription}>18190-000</div>
         </div>
 
         <h3 className={styles.mapTitle}>Como chegar:</h3>

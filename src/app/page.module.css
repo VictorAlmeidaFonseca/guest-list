@@ -213,6 +213,7 @@
 .footerDescription {
   font-family: 'Roboto', sans-serif;
   font-style: italic;
+  font-size: 15px
 }
   
 
@@ -221,10 +222,6 @@
 @media (max-width: 768px) {
   .title {
     font-size: 2rem; /* Ajuste do tamanho do título */
-  }
-
-  .footerDescription {
-    font-size: 1.2rem; /* Menor título em dispositivos móveis */
   }
 
   .invitationTitle {

@@ -46,7 +46,7 @@ export default function Home() {
       quantidade: quantity,
       prefixo: prefix || "",
       confirmado: true,
-      quantidadeConfirmada: selectedQuantity,
+      quantidadeConfirmada: going && quantity === 1 ? 1 : selectedQuantity,
     };
 
     console.log("Enviando confirmação:", body);

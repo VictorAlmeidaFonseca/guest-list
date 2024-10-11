@@ -97,13 +97,21 @@ export default function GuestList() {
     return <p>Erro: {error}</p>;
   }
 
+  // Ordenar a lista de convidados, colocando os confirmados primeiro
+  const sortedGuests = [...guests].sort((a, b) => {
+    if (a.confirmado === b.confirmado) {
+      return 0; // Mantém a ordem original entre confirmados e não confirmados
+    }
+    return a.confirmado ? -1 : 1; // Coloca os confirmados antes
+  });
+
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>Lista de Convidados</h1>
       <h3>
         convidados: {guests.reduce((acc, curr) => curr.quantidade + acc, 0)}
       </h3>
-      <h3>já responderam: {guests.filter((q) => q.confirmado).length}</h3>
+      <h3>já responderam: {guests.filter((q) => q.confirmado).reduce((acc, curr) => curr.quantidade + acc, 0)}</h3>
       <h3 className={styles.subtitle}>
         confirmados:{" "}
         {guests
@@ -111,7 +119,7 @@ export default function GuestList() {
           .reduce((acc, curr) => curr.quantidadeConfirmada + acc, 0)}
       </h3>
 
-      {guests.map((guest, index) => (
+      {sortedGuests.map((guest, index) => (
         <div
           key={index}
           className={
@@ -171,7 +179,7 @@ export default function GuestList() {
           </div>
           <FaShareAlt
             onClick={() => window.open(generateInviteLink(guest), "_blank")}
-          ></FaShareAlt>
+          />
           {editIndex === index && (
             <button
               className={styles["save-button"]}
